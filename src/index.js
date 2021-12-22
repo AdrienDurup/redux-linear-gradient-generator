@@ -14,14 +14,11 @@ import { setFirst, setLast, setDegres, resetAll } from './actions';
 // };
 
 // == Rendu dans le DOM
-function renderGradient() {
-  const state = store.getState();
-  const { direction, firstColor, lastColor } = state;
+// function renderGradient() {
+//   const state = store.getState();
+//   const { direction, firstColor, lastColor } = state;
 
-  document.getElementById('gradient').style.background = `
-    linear-gradient(${direction},${firstColor},${lastColor})
-  `;
-}
+// }
 // function renderColors() {
 //   const state = store.getState();
 //   const { firstColor, lastColor } = state;
@@ -36,40 +33,40 @@ function renderGradient() {
 
 // == Initialisation
 function draw() {
-  renderGradient();
-  //renderColors();
+  // renderGradient();
+  // renderColors();
 }
 
-draw();
+// draw();
 
-store.subscribe(draw);
+// store.subscribe(draw);
 
 // == Controls
-document.getElementById('randAll')
-  .addEventListener('click', () => {
-    store.dispatch(setFirst());
-    store.dispatch(setLast());
-  });
+// document.getElementById('randAll')
+//   .addEventListener('click', () => {
+//     store.dispatch(setFirst());
+//     store.dispatch(setLast());
+//   });
 
-document.getElementById('randFirst')
-  .addEventListener('click', () => {
-    store.dispatch(setFirst());
-  });
+// document.getElementById('randFirst')
+//   .addEventListener('click', () => {
+//     store.dispatch(setFirst());
+//   });
 
-document.getElementById('randLast')
-  .addEventListener('click', () => {
-    store.dispatch(setLast());
-  });
+// document.getElementById('randLast')
+//   .addEventListener('click', () => {
+//     store.dispatch(setLast());
+//   });
 
-const degresButtons = document.querySelectorAll('.button-degres');
-degresButtons.forEach((el) => {
-  el.addEventListener('click', () => { store.dispatch(setDegres(el.value)) });
-});
+// const degresButtons = document.querySelectorAll('.button-degres');
+// degresButtons.forEach((el) => {
+//   el.addEventListener('click', () => { store.dispatch(setDegres(el.value)) });
+// });
 
-document.getElementById('reset')
-  .addEventListener('click', () => {
-    store.dispatch(resetAll());
-  });
+// document.getElementById('reset')
+//   .addEventListener('click', () => {
+//     store.dispatch(resetAll());
+//   });
 
   const root = document.getElementById('root');
   render(<App />, root);

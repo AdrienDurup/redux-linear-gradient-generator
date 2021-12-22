@@ -10,9 +10,9 @@ const data = [
 ];
 
 const DegresButtons = () => (
-  <div class="buttons group">
+  <div className="buttons group">
     {data.map((el) => (
-      <button class="button button-degres" value={el.val} key={el.id}>{el.label}</button>
+      <button className="button button-degres" value={el.val} key={el.id}>{el.label}</button>
     ))}
   </div>
 );

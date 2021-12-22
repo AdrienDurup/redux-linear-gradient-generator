@@ -1,5 +1,5 @@
 // redux
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import store from '../store';
 
 // components
@@ -10,14 +10,13 @@ import ColorButtons from '../components/Colorbuttons';
 import DegresButtons from '../components/DegresButtons';
 
 const GradientCreator = () => {
-
   console.log('main');
   const test = () => {
     console.log('test bouton');
   };
   return (
     <Provider store={store}>
-      <Counter value={0} />
+      <Counter />
       <ColorButtons setFirst={test} setLast={test} setAll={test} resetAll={test} />
       <ColorCodes first={'#FF00FF'} last={'#FFFF00'} />
       <GradientBox />
