@@ -1,88 +1,75 @@
 // == Imports
+import App from './components/App';
+import { render } from 'react-dom';
+import store from './store';
 import { randomHexColor, generateSpanColor } from './utils';
+import { setFirst, setLast, setDegres, resetAll } from './actions';
 
 // == State
-const state = {
-  firstColor: '#e367a4',
-  lastColor: '#48b1f3',
-  direction: '90deg',
-  nbColors: 0,
-};
+// const state = {
+//   firstColor: '#e367a4',
+//   lastColor: '#48b1f3',
+//   direction: '90deg',
+//   nbColors: 0,
+// };
 
 // == Rendu dans le DOM
-function renderNbColors() {
-  const { nbColors } = state;
-
-  document.getElementById('nbColors').innerHTML = `
-    ${nbColors} couleur(s) générée(s)
-  `;
-}
 function renderGradient() {
+  const state = store.getState();
   const { direction, firstColor, lastColor } = state;
 
   document.getElementById('gradient').style.background = `
     linear-gradient(${direction},${firstColor},${lastColor})
   `;
 }
-function renderColors() {
-  const { firstColor, lastColor } = state;
+// function renderColors() {
+//   const state = store.getState();
+//   const { firstColor, lastColor } = state;
 
-  const firstSpan = generateSpanColor(firstColor);
-  const lastSpan = generateSpanColor(lastColor);
+//   const firstSpan = generateSpanColor(firstColor);
+//   const lastSpan = generateSpanColor(lastColor);
 
-  const result = `${firstSpan} - ${lastSpan}`;
+//   const result = `${firstSpan} - ${lastSpan}`;
 
-  document.getElementById('colors').innerHTML = result;
-}
+//   document.getElementById('colors').innerHTML = result;
+// }
 
 // == Initialisation
-renderNbColors();
-renderGradient();
-renderColors();
+function draw() {
+  renderGradient();
+  //renderColors();
+}
+
+draw();
+
+store.subscribe(draw);
 
 // == Controls
 document.getElementById('randAll')
   .addEventListener('click', () => {
-    // debug
-    console.log('Random all colors');
-    // data
-    state.nbColors += 2;
-    state.firstColor = randomHexColor();
-    state.lastColor = randomHexColor();
-    // ui
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    store.dispatch(setFirst());
+    store.dispatch(setLast());
   });
 
 document.getElementById('randFirst')
   .addEventListener('click', () => {
-    state.nbColors += 1;
-    state.firstColor = randomHexColor();
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    store.dispatch(setFirst());
   });
 
 document.getElementById('randLast')
   .addEventListener('click', () => {
-    state.nbColors += 1;
-    state.lastColor = randomHexColor();
-    renderNbColors();
-    renderGradient();
-    renderColors();
+    store.dispatch(setLast());
   });
 
-document.getElementById('toLeft')
+const degresButtons = document.querySelectorAll('.button-degres');
+degresButtons.forEach((el) => {
+  el.addEventListener('click', () => { store.dispatch(setDegres(el.value)) });
+});
+
+document.getElementById('reset')
   .addEventListener('click', () => {
-    state.direction = '270deg';
-    renderGradient();
-    renderColors();
+    store.dispatch(resetAll());
   });
 
-document.getElementById('toRight')
-  .addEventListener('click', () => {
-    state.direction = '90deg';
-    renderGradient();
-    renderColors();
-  });
+  const root = document.getElementById('root');
+  render(<App />, root);
