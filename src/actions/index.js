@@ -1,19 +1,12 @@
 import { color } from './types';
 import { randomHexColor } from '../utils';
 
-export const setDegres = (angle) => (
+export const setDegres = (payload) => (
   {
     type: color.DIRECTION,
-    payload: `${angle}deg`,
+    payload,
   }
 );
-
-// export const setColor = (prop) => {
-//   const obj = {};
-//   obj.type = color.UPDATE;
-//   obj[prop] = randomHexColor();
-//   return obj;
-// };
 
 export const setFirst = () => ({
   type: color.UPDATEFIRST,
@@ -21,18 +14,10 @@ export const setFirst = () => ({
 });
 
 export const setLast = () => ({
-  type: color.UPDATEFIRST,
+  type: color.UPDATELAST,
   payload: randomHexColor(),
 });
 
 export const resetAll = () => ({
   type: color.RESET_ALL,
 });
-
-// document.getElementById('randLast')
-//   .addEventListener('click', () => {
-//     store.dispatch({
-//       type: colorT.UPDATELAST,
-//       payload: randomHexColor(),
-//     });
-//   });

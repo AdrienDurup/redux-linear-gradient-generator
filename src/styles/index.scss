@@ -48,10 +48,10 @@ body {
 #colors {
   font-family: monospace;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   color: #666;
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-shadow: 1px 1px 3px #999;
 }
 #direction {
@@ -67,5 +67,7 @@ body {
   font-size: 8rem;
   line-height: 2;
 }
-
-
+#colors.color-text{
+  margin: 0;
+  padding: 0;
+}
